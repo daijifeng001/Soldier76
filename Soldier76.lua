@@ -45,8 +45,11 @@ userInfo = {
 	-- 启动控制 (capslock - 使用大写锁定键控制 | numlock - 小键盘锁定键控制 | G_bind - 使用指令控制) | Start up control
 	startControl = "G_bind",
 
-	-- 降低后坐力
+	-- 降低下压力
 	reduceDownForce = "capslock",
+	
+	-- 切换主武器按键
+	primaryWeaponKeys = {"1", "2"},
 
 	-- 瞄准设置 (default - 使用游戏默认设置 | recommend - 使用脚本推荐设置 | custom - 自定义设置 | ctrlmode - 下蹲模式) | Aiming setting
 	aimingSettings = "ctrlmode",
@@ -199,26 +202,6 @@ userInfo = {
 		["lalt + F12"] = "",
 	},
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -893,14 +876,10 @@ function pubg.setWeapon (weaponName)
 		inputWeaponIdx = 2
 	end
 
-	
+	PressAndReleaseKey(userInfo.primaryWeaponKeys [inputWeaponIdx])
+
 	if pubg.currentWeapon ~= inputWeaponIdx then
 		pubg.currentWeapon = inputWeaponIdx
-		if 1 == inputWeaponIdx then
-			PressAndReleaseKey("1")
-		elseif 2 == inputWeaponIdx then
-			PressAndReleaseKey("2")
-		end
 		if 0~= pubg.weaponAllCanUses[inputWeaponIdx] then
 			pubg.setGun(pubg.allCanUse[pubg.weaponAllCanUses[inputWeaponIdx]])
 			pubg.setScope(pubg.weaponScopes[inputWeaponIdx])
