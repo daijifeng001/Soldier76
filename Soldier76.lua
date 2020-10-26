@@ -1425,6 +1425,4 @@ EnablePrimaryMouseButtonEvents(true) -- Enable left mouse button event reporting
 pubg.GD = GetDate -- Setting aliases
 pubg.init() -- Script initialization
 
---[[ Script End ]]</script>
-  </profile>
-</profiles>
+--[[ Script End ]]
