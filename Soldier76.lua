@@ -1,5 +1,3 @@
---[[ Script Start ]]
-
 ------------------------------------------ [[ 玩家自定义 ]] ------------------------------------------
 -- 推荐边查阅帮助文档，边对下列内容进行修改。
 -- 参考地址: https://github.com/kiccer/Soldier76#%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8
@@ -16,22 +14,28 @@ userInfo = {
 	-- CPU load level, It is recommended to enter a number between 1 and 30, cannot be less than 1.
 	-- The lower the value is, the better the effect is, the higher the value, the higher the number of frames.
 	-- (excessive frame dropping will directly affect the gun pressing effect, please reduce the value while ensuring the frame number)
-	cpuLoad = 2,
+	cpuLoad = 1,
 
 	-- 灵敏度调整 | Sensitivity adjustment
 	sensitivity = {
 		-- 开镜 | sighting mirror
-		ADS = 100,
+		ADS = 28,
 		-- 腰射 | take aim
 		Aim = 0.55,
 		-- 二倍 | twice scope
-		scopeX2 = 1.3,
+		scopeX2 = 1.8,
 		-- 三倍 | trebling scope
-		scopeX3 = 1.3,
+		scopeX3 = 2.7,
 		-- 四倍 | quadruple scope
-		scopeX4 = 3.9,
+		scopeX4 = 3.7,
 		-- 六倍 | sixfold scope
-		scopeX6 = 2.3,
+		scopeX6 = 5.2,
+		-- 八倍 | eightfold scope
+		scopeX8 = 5.2,
+		-- 单倍放大模式
+		scopeX1Zoom = 1.25,
+		-- 降低下压力
+		reduceDownForce = 0.7,
 	},
 
 	-- 自动腰射，不使用自动腰射留空，使用则设置为键盘上按键
@@ -39,10 +43,13 @@ userInfo = {
 	autoPressAimKey = "",
 
 	-- 启动控制 (capslock - 使用大写锁定键控制 | numlock - 小键盘锁定键控制 | G_bind - 使用指令控制) | Start up control
-	startControl = "capslock",
+	startControl = "G_bind",
+
+	-- 降低后坐力
+	reduceDownForce = "capslock",
 
 	-- 瞄准设置 (default - 使用游戏默认设置 | recommend - 使用脚本推荐设置 | custom - 自定义设置 | ctrlmode - 下蹲模式) | Aiming setting
-	aimingSettings = "recommend",
+	aimingSettings = "ctrlmode",
 
 	-- 当 aimingSettings = "custom" ，需要在此处设置自定义判断条件，通常配合 IsMouseButtonPressed 或 IsModifierPressed 使用，使用方法请查阅 G-series Lua API 参考文档.docx
 	customAimingSettings = {
@@ -78,12 +85,15 @@ userInfo = {
 			{ "QBZ",            1,          1,          0.8 }, -- 补偿 + 基础镜 + 直角 + 扩容 | Komp + Reddot + Triangular grip + Mag
 			{ "G36C",           1,          1,          0.8 }, -- 补偿 + 基础镜 + 直角 + 扩容 | Komp + Reddot + Triangular grip + Mag
 			{ "M16A4",          2,          1,          0.8 }, -- 补偿 + 基础镜 + 枪托 + 扩容 | Komp + Reddot + Gunstock + Mag
+			{ "Mini-14",        1,          1,          0.8 }, -- 补偿 + 基础镜 + 扩容
 		},
 		["7.62"] = {
 			-- 枪械             模式         系数        下蹲系数
 			{ "AKM",            1,          1,          0.8 }, -- 补偿 + 基础镜 + 扩容 | Komp + Reddot + Mag
 			{ "Beryl M762",     1,          1,          0.8 }, -- 补偿 + 基础镜 + 直角 + 扩容 | Komp + Reddot + Triangular grip + Mag
 			{ "DP-28",          1,          1,          0.8 }, -- 基础镜 | Reddot
+			{ "SLR",            1,          1,          0.8 }, -- 补偿 + 基础镜 + 扩容 + 托腮板
+			{ "SKS",            1,          1,          0.8 }, -- 补偿 + 基础镜 + 垂直 + 扩容 + 托腮板
 		},
 	},
 
@@ -95,12 +105,12 @@ userInfo = {
 		["G3"] = "",
 		["G4"] = "",
 		["G5"] = "",
-		["G6"] = "5.56",
-		["G7"] = "9mm",
-		["G8"] = "7.62",
-		["G9"] = ".45",
-		["G10"] = "last",
-		["G11"] = "next",
+		["G6"] = "",
+		["G7"] = "set_weapon_2",
+		["G8"] = "set_weapon_1",
+		["G9"] = "off",
+		["G10"] = "",
+		["G11"] = "",
 		-- lalt + G
 		["lalt + G3"] = "",
 		["lalt + G4"] = "",
@@ -125,12 +135,12 @@ userInfo = {
 		["lshift + G3"] = "",
 		["lshift + G4"] = "",
 		["lshift + G5"] = "",
-		["lshift + G6"] = "fast_pickup",
+		["lshift + G6"] = "",
 		["lshift + G7"] = "",
 		["lshift + G8"] = "",
 		["lshift + G9"] = "",
 		["lshift + G10"] = "",
-		["lshift + G11"] = "fast_lick_box",
+		["lshift + G11"] = "",
 		-- ralt + G
 		["ralt + G3"] = "",
 		["ralt + G4"] = "",
@@ -155,25 +165,38 @@ userInfo = {
 		["rshift + G3"] = "",
 		["rshift + G4"] = "",
 		["rshift + G5"] = "",
-		["rshift + G6"] = "fast_discard",
+		["rshift + G6"] = "",
 		["rshift + G7"] = "",
 		["rshift + G8"] = "",
 		["rshift + G9"] = "",
 		["rshift + G10"] = "",
 		["rshift + G11"] = "",
 		-- 非鼠标G键，可以使键盘或者耳机上的G键，默认使用键盘G键，请确保你使用的是可编程的罗技键盘 | F1~12 (Non-mouse G-key)
-		["F1"] = "",
-		["F2"] = "",
-		["F3"] = "",
-		["F4"] = "",
-		["F5"] = "",
-		["F6"] = "",
-		["F7"] = "",
-		["F8"] = "",
-		["F9"] = "",
-		["F10"] = "",
+		["F1"] = "AKM",
+		["F2"] = "Beryl M762",
+		["F3"] = "M416",
+		["F4"] = "SCAR-L",
+		["F5"] = "scopeX1",
+		["F6"] = "scopeX2",
+		["F7"] = "scopeX3",
+		["F8"] = "scopeX4",
+		["F9"] = "scopeX6",
+		["F10"] = "scopeX8",
 		["F11"] = "",
-		["F12"] = "",
+		["F12"] = "",		
+		-- lalt + F
+		["lalt + F1"] = "SKS",
+		["lalt + F2"] = "SLR",
+		["lalt + F3"] = "Mini-14",
+		["lalt + F4"] = "M16A4",
+		["lalt + F5"] = "Vector",
+		["lalt + F6"] = "Micro UZI",
+		["lalt + F7"] = "UMP45",
+		["lalt + F8"] = "Tommy Gun",
+		["lalt + F9"] = "",
+		["lalt + F10"] = "",
+		["lalt + F11"] = "",
+		["lalt + F12"] = "",
 	},
 }
 
@@ -234,12 +257,18 @@ pubg = {
 	scopeX3 = userInfo.sensitivity.scopeX3, -- 三倍压枪倍率
 	scopeX4 = userInfo.sensitivity.scopeX4, -- 四倍压枪倍率
 	scopeX6 = userInfo.sensitivity.scopeX6, -- 六倍压枪倍率
+	scopeX8 = userInfo.sensitivity.scopeX8, -- 六倍压枪倍率
 	scope_current = "scopeX1", -- 当前使用倍镜
 	generalSensitivityRatio = userInfo.sensitivity.ADS / 100, -- 按比例调整灵敏度
 	isStart = false, -- 是否是启动状态
 	G1 = false, -- G1键状态
 	currentTime = 0, -- 此刻
 	bulletIndex = 0, -- 第几颗子弹
+
+
+	currentWeapon = 0, --Primary weapon index
+	weaponAllCanUses = {0, 0}, --All can use indexes of primary weapons
+	weaponScopes = {"scopeX1", "scopeX1"},
 }
 
 pubg.xLengthForDebug = pubg.generalSensitivityRatio * 60 -- 调试模式下的水平移动单元长度
@@ -263,7 +292,7 @@ function pubg.isAimingState (mode)
 			elseif userInfo.aimingSettings == "default" then
 				return not IsModifierPressed("lshift") and not IsModifierPressed("lalt")
 			elseif userInfo.aimingSettings == "ctrlmode" then
-				return IsMouseButtonPressed(3) and not IsModifierPressed("lshift")
+				return IsMouseButtonPressed(3)
 			elseif userInfo.aimingSettings == "custom" then
 				return userInfo.customAimingSettings.ADS()
 			end
@@ -338,12 +367,9 @@ pubg["Beryl M762"] = function (gunName)
 			{5, 81},
 			{7, 123},
 			{10, 143},
-			{11, 188},
-			{12, 180},
-			{15, 188},
-			{20, 190},
-			{25, 197},
-			{40, 191},
+			{20, 143},
+			{25, 160},
+			{40, 170},
 		}
 	})
 
@@ -496,6 +522,42 @@ pubg["DP-28"] = function (gunName)
 			{20, 196},
 			{40, 191},
 			{47, 206},
+		}
+	})
+
+end
+
+pubg["SLR"] = function (gunName)
+
+	return pubg.execOptions(gunName, {
+		interval = 50,
+		ballistic = {
+			{1, 0},
+			{2, 40},
+		}
+	})
+
+end
+
+pubg["SKS"] = function (gunName)
+
+	return pubg.execOptions(gunName, {
+		interval = 50,
+		ballistic = {
+			{1, 0},
+			{2, 40},
+		}
+	})
+
+end
+
+pubg["Mini-14"] = function (gunName)
+
+	return pubg.execOptions(gunName, {
+		interval = 50,
+		ballistic = {
+			{1, 0},
+			{2, 60},
 		}
 	})
 
@@ -685,8 +747,16 @@ function pubg.getRealY (options, y)
 		realY = y * userInfo.sensitivity.Aim * pubg.generalSensitivityRatio
 	end
 
-	if userInfo.aimingSettings == "ctrlmode" and IsModifierPressed("lctrl") then
+	if userInfo.aimingSettings == "ctrlmode" and IsModifierPressed("rctrl") then
 		realY = realY * options.ctrlmodeRatio
+	end
+
+	if userInfo.aimingSettings == "ctrlmode" and IsModifierPressed("lshift") and pubg.scope_current == "scopeX1" then
+		realY = realY * userInfo.sensitivity.scopeX1Zoom
+	end
+
+	if IsKeyLockOn(userInfo.reduceDownForce) then
+		realY = realY * userInfo.sensitivity.reduceDownForce
 	end
 
 	return realY
@@ -728,6 +798,10 @@ end
 --[[ set current scope ]]
 function pubg.setScope (scope)
 	pubg.scope_current = scope
+	
+	if 0 ~= pubg.currentWeapon then
+		pubg.weaponScopes[pubg.currentWeapon] = scope
+	end
 end
 
 --[[ set current gun ]]
@@ -760,6 +834,10 @@ function pubg.setGun (gunName)
 
 	end
 
+	if 0 ~= pubg.currentWeapon then
+		pubg.weaponAllCanUses[pubg.currentWeapon] = allCanUse_index
+	end
+
 	pubg.changeIsStart(true)
 end
 
@@ -769,7 +847,7 @@ function pubg.findInCanUse (cmd)
 	if "first_in_canUse" == cmd then
 		pubg.allCanUse_index = 1
 	elseif "next_in_canUse" == cmd then
-		if pubg.allCanUse_index < #pubg.allCanUse then
+		if pubg.allCanUse_index &lt; #pubg.allCanUse then
 			pubg.allCanUse_index = pubg.allCanUse_index + 1
 		end
 	elseif "last_in_canUse" == cmd then
@@ -784,7 +862,7 @@ function pubg.findInSeries (cmd)
 	if "first" == cmd then
 		pubg.gunIndex = 1
 	elseif "next" == cmd then
-		if pubg.gunIndex < #pubg.gun[pubg.bulletType] then
+		if pubg.gunIndex &lt; #pubg.gun[pubg.bulletType] then
 			pubg.gunIndex = pubg.gunIndex + 1
 		end
 	elseif "last" == cmd then
@@ -804,6 +882,34 @@ function pubg.runStatus ()
 		return pubg.isStart
 	end
 end
+
+
+--[[ set current weapon index ]]
+function pubg.setWeapon (weaponName)
+	local inputWeaponIdx = 0
+	if "set_weapon_1" == weaponName then
+		inputWeaponIdx = 1
+	elseif "set_weapon_2" == weaponName then
+		inputWeaponIdx = 2
+	end
+
+	
+	if pubg.currentWeapon ~= inputWeaponIdx then
+		pubg.currentWeapon = inputWeaponIdx
+		if 1 == inputWeaponIdx then
+			PressAndReleaseKey("1")
+		elseif 2 == inputWeaponIdx then
+			PressAndReleaseKey("2")
+		end
+		if 0~= pubg.weaponAllCanUses[inputWeaponIdx] then
+			pubg.setGun(pubg.allCanUse[pubg.weaponAllCanUses[inputWeaponIdx]])
+			pubg.setScope(pubg.weaponScopes[inputWeaponIdx])
+		end
+	end
+
+	pubg.changeIsStart(true)
+end
+
 
 --[[ 一键舔包，仅拾取进背包的物品，无法拾取需穿戴的物品 ]]
 function pubg.fastLickBox ()
@@ -959,6 +1065,7 @@ function pubg.runCmd (cmd)
 		["scopeX3"] = pubg.setScope,
 		["scopeX4"] = pubg.setScope,
 		["scopeX6"] = pubg.setScope,
+		["scopeX8"] = pubg.setScope,
 		["UMP45"] = pubg.setGun,
 		["Tommy Gun"] = pubg.setGun,
 		["Vector"] = pubg.setGun,
@@ -971,6 +1078,9 @@ function pubg.runCmd (cmd)
 		["AKM"] = pubg.setGun,
 		["Beryl M762"] = pubg.setGun,
 		["DP-28"] = pubg.setGun,
+		["SLR"] = pubg.setGun,
+		["SKS"] = pubg.setGun,
+		["Mini-14"] = pubg.setGun,
 		["first"] = pubg.findInSeries,
 		["next"] = pubg.findInSeries,
 		["last"] = pubg.findInSeries,
@@ -980,6 +1090,8 @@ function pubg.runCmd (cmd)
 		["fast_pickup"] = pubg.fastPickup,
 		["fast_discard"] = pubg.fastDiscard,
 		["fast_lick_box"] = pubg.fastLickBox,
+		["set_weapon_1"] = pubg.setWeapon,
+		["set_weapon_2"] = pubg.setWeapon,
 		["off"] = function ()
 			pubg.changeIsStart(false)
 		end,
@@ -1002,7 +1114,7 @@ function pubg.outputLogRender ()
 		pubg.renderDom.switchTable = pubg.outputLogGunSwitchTable()
 	end
 	local resStr = table.concat({
-		"\n>> [\"", pubg.renderDom.combo_key, "\"] = \"", pubg.renderDom.cmd, "\" <<\n",
+		"\n>> [\"", pubg.renderDom.combo_key, "\"] = \"", pubg.renderDom.cmd, "\" &lt;&lt;\n",
 		pubg.renderDom.separator,
 		pubg.renderDom.switchTable,
 		pubg.renderDom.separator,
@@ -1148,7 +1260,7 @@ function OnEvent (event, arg, family)
 	pubg.OnEvent_NoRecoil(event, arg, family)
 
 	-- Switching arsenals according to different types of ammunition
-	if event == "MOUSE_BUTTON_PRESSED" and arg >=3 and arg <= 11 and family == "mouse" then
+	if event == "MOUSE_BUTTON_PRESSED" and arg >=3 and arg &lt;= 11 and family == "mouse" then
 		local modifier = "G" .. arg
 		local list = { "lalt", "lctrl", "lshift", "ralt", "rctrl", "rshift" }
 
@@ -1160,9 +1272,18 @@ function OnEvent (event, arg, family)
 		end
 
 		pubg.modifierHandle(modifier)
-	elseif event == "G_PRESSED" and arg >=1 and arg <= 12 then
+	elseif event == "G_PRESSED" and arg >=1 and arg &lt;= 12 then
 		-- if not pubg.runStatus() and userInfo.startControl ~= "G_bind" then return false end
 		local modifier = "F" .. arg
+
+		local list = { "lalt", "lctrl", "lshift", "ralt", "rctrl", "rshift" }
+
+		for i = 1, #list do
+			if IsModifierPressed(list[i]) then
+				modifier = list[i] .. " + " .. modifier
+				break
+			end
+		end
 
 		pubg.modifierHandle(modifier)
 	end
@@ -1325,4 +1446,6 @@ EnablePrimaryMouseButtonEvents(true) -- Enable left mouse button event reporting
 pubg.GD = GetDate -- Setting aliases
 pubg.init() -- Script initialization
 
---[[ Script End ]]
+--[[ Script End ]]</script>
+  </profile>
+</profiles>
