@@ -1,108 +1,112 @@
------------------------------------------- [[ ç©å®¶è‡ªå®šä¹‰ ]] ------------------------------------------
--- æ¨èè¾¹æŸ¥é˜…å¸®åŠ©æ–‡æ¡£ï¼Œè¾¹å¯¹ä¸‹åˆ—å†…å®¹è¿›è¡Œä¿®æ”¹ã€‚
--- å‚è€ƒåœ°å€: https://github.com/kiccer/Soldier76#%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8
+--[[ Script Start ]]
+
+------------------------------------------ [[ Íæ¼Ò×Ô¶¨Òå ]] ------------------------------------------
+-- ÍÆ¼ö±ß²éÔÄ°ïÖúÎÄµµ£¬±ß¶ÔÏÂÁĞÄÚÈİ½øĞĞĞŞ¸Ä¡£
+-- ²Î¿¼µØÖ·: https://github.com/kiccer/Soldier76#%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8
 -- It is recommended to review the help documents and modify the following contents.
 userInfo = {
 
-	-- æ˜¯å¦è¾“å‡ºè°ƒè¯•ä¿¡æ¯ï¼Œå…³é—­åå¯ä»¥å‡å° CPU è®¡ç®—å‹åŠ›ã€‚å»ºè®®è°ƒè¯•æ—¶å¼€å¯ï¼Œè°ƒè¯•å®Œæ¯•åå…³é—­ã€‚(1 - å¼€å¯ | 0 - å…³é—­)
+	-- ÊÇ·ñÊä³öµ÷ÊÔĞÅÏ¢£¬¹Ø±Õºó¿ÉÒÔ¼õĞ¡ CPU ¼ÆËãÑ¹Á¦¡£½¨Òéµ÷ÊÔÊ±¿ªÆô£¬µ÷ÊÔÍê±Ïºó¹Ø±Õ¡£(1 - ¿ªÆô | 0 - ¹Ø±Õ)
 	-- Whether to output debugging information, the CPU calculation pressure can be reduced after close.
 	-- It is recommended to turn it on during debugging and turn it off after debugging.
 	-- (0 - Disable | 1 - Enable)
 	debug = 1,
 
-	-- CPU è´Ÿè½½ç­‰çº§ï¼Œå»ºè®®è¾“å…¥ 1 ~ 30 ä¹‹é—´çš„æ•°å­—ï¼Œä¸èƒ½å°äº 1 ã€‚å€¼è¶Šå°ï¼Œå‹æªæ•ˆæœè¶Šå¥½ï¼Œå€¼è¶Šå¤§ï¼Œå¸§æ•°è¶Šé«˜ã€‚(è¿‡åˆ†æ‰å¸§ä¼šç›´æ¥å½±å“å‹æªæ•ˆæœï¼Œè¯·åœ¨ä¿è¯å¸§æ•°çš„æƒ…å†µä¸‹å‡å°è¯¥å€¼)
+	-- CPU ¸ºÔØµÈ¼¶£¬½¨ÒéÊäÈë 1 ~ 30 Ö®¼äµÄÊı×Ö£¬²»ÄÜĞ¡ÓÚ 1 ¡£ÖµÔ½Ğ¡£¬Ñ¹Ç¹Ğ§¹ûÔ½ºÃ£¬ÖµÔ½´ó£¬Ö¡ÊıÔ½¸ß¡£(¹ı·ÖµôÖ¡»áÖ±½ÓÓ°ÏìÑ¹Ç¹Ğ§¹û£¬ÇëÔÚ±£Ö¤Ö¡ÊıµÄÇé¿öÏÂ¼õĞ¡¸ÃÖµ)
 	-- CPU load level, It is recommended to enter a number between 1 and 30, cannot be less than 1.
 	-- The lower the value is, the better the effect is, the higher the value, the higher the number of frames.
 	-- (excessive frame dropping will directly affect the gun pressing effect, please reduce the value while ensuring the frame number)
 	cpuLoad = 1,
 
-	-- çµæ•åº¦è°ƒæ•´ | Sensitivity adjustment
+	-- ÁéÃô¶Èµ÷Õû | Sensitivity adjustment
 	sensitivity = {
-		-- å¼€é•œ | sighting mirror
+		-- ¿ª¾µ | sighting mirror
 		ADS = 28,
-		-- è…°å°„ | take aim
+		-- ÑüÉä | take aim
 		Aim = 0.55,
-		-- äºŒå€ | twice scope
+		-- ¶ş±¶ | twice scope
 		scopeX2 = 1.8,
-		-- ä¸‰å€ | trebling scope
+		-- Èı±¶ | trebling scope
 		scopeX3 = 2.7,
-		-- å››å€ | quadruple scope
+		-- ËÄ±¶ | quadruple scope
 		scopeX4 = 3.7,
-		-- å…­å€ | sixfold scope
+		-- Áù±¶ | sixfold scope
 		scopeX6 = 5.2,
-		-- å…«å€ | eightfold scope
+		-- °Ë±¶ | eightfold scope
 		scopeX8 = 5.2,
-		-- å•å€æ”¾å¤§æ¨¡å¼
+		-- µ¥±¶·Å´óÄ£Ê½
 		scopeX1Zoom = 1.25,
-		-- é™ä½ä¸‹å‹åŠ›
+		-- ½µµÍÏÂÑ¹Á¦
 		reduceDownForce = 0.7,
 	},
 
-	-- è‡ªåŠ¨è…°å°„ï¼Œä¸ä½¿ç”¨è‡ªåŠ¨è…°å°„ç•™ç©ºï¼Œä½¿ç”¨åˆ™è®¾ç½®ä¸ºé”®ç›˜ä¸ŠæŒ‰é”®
+	-- ×Ô¶¯ÑüÉä£¬²»Ê¹ÓÃ×Ô¶¯ÑüÉäÁô¿Õ£¬Ê¹ÓÃÔòÉèÖÃÎª¼üÅÌÉÏ°´¼ü
 	-- Auto aim, leave blank without auto aim, set as the key on the keyboard when using.
 	autoPressAimKey = "",
 
-	-- å¯åŠ¨æ§åˆ¶ (capslock - ä½¿ç”¨å¤§å†™é”å®šé”®æ§åˆ¶ | numlock - å°é”®ç›˜é”å®šé”®æ§åˆ¶ | G_bind - ä½¿ç”¨æŒ‡ä»¤æ§åˆ¶) | Start up control
+	-- Æô¶¯¿ØÖÆ (capslock - Ê¹ÓÃ´óĞ´Ëø¶¨¼ü¿ØÖÆ | numlock - Ğ¡¼üÅÌËø¶¨¼ü¿ØÖÆ | G_bind - Ê¹ÓÃÖ¸Áî¿ØÖÆ) | Start up control
 	startControl = "G_bind",
 
-	-- é™ä½ä¸‹å‹åŠ›
+	-- ½µµÍÏÂÑ¹Á¦
 	reduceDownForce = "capslock",
 	
-	-- åˆ‡æ¢ä¸»æ­¦å™¨æŒ‰é”®
+	-- ÇĞ»»Ö÷ÎäÆ÷°´¼ü
 	primaryWeaponKeys = {"1", "2"},
 
-	-- ç„å‡†è®¾ç½® (default - ä½¿ç”¨æ¸¸æˆé»˜è®¤è®¾ç½® | recommend - ä½¿ç”¨è„šæœ¬æ¨èè®¾ç½® | custom - è‡ªå®šä¹‰è®¾ç½® | ctrlmode - ä¸‹è¹²æ¨¡å¼) | Aiming setting
+	-- Ãé×¼ÉèÖÃ (default - Ê¹ÓÃÓÎÏ·Ä¬ÈÏÉèÖÃ | recommend - Ê¹ÓÃ½Å±¾ÍÆ¼öÉèÖÃ | custom - ×Ô¶¨ÒåÉèÖÃ | ctrlmode - ÏÂ¶×Ä£Ê½) | Aiming setting
 	aimingSettings = "ctrlmode",
 
-	-- å½“ aimingSettings = "custom" ï¼Œéœ€è¦åœ¨æ­¤å¤„è®¾ç½®è‡ªå®šä¹‰åˆ¤æ–­æ¡ä»¶ï¼Œé€šå¸¸é…åˆ IsMouseButtonPressed æˆ– IsModifierPressed ä½¿ç”¨ï¼Œä½¿ç”¨æ–¹æ³•è¯·æŸ¥é˜… G-series Lua API å‚è€ƒæ–‡æ¡£.docx
+	-- µ± aimingSettings = "custom" £¬ĞèÒªÔÚ´Ë´¦ÉèÖÃ×Ô¶¨ÒåÅĞ¶ÏÌõ¼ş£¬Í¨³£ÅäºÏ IsMouseButtonPressed »ò IsModifierPressed Ê¹ÓÃ£¬Ê¹ÓÃ·½·¨Çë²éÔÄ G-series Lua API ²Î¿¼ÎÄµµ.docx
 	customAimingSettings = {
-		-- å¼€é•œåˆ¤æ–­
+		-- ¿ª¾µÅĞ¶Ï
 		ADS = function ()
-			return false -- åˆ¤æ–­æ¡ä»¶ï¼Œè¿”å›å€¼ä¸ºå¸ƒå°”å‹
+			return false -- ÅĞ¶ÏÌõ¼ş£¬·µ»ØÖµÎª²¼¶ûĞÍ
 		end,
-		-- è…°å°„åˆ¤æ–­
+		-- ÑüÉäÅĞ¶Ï
 		Aim = function ()
-			return false -- åˆ¤æ–­æ¡ä»¶ï¼Œè¿”å›å€¼ä¸ºå¸ƒå°”å‹
+			return false -- ÅĞ¶ÏÌõ¼ş£¬·µ»ØÖµÎª²¼¶ûĞÍ
 		end,
 	},
 
-	-- æ”¯æŒçš„æªæ¢°ï¼Œæ’åˆ—é¡ºåºå³æ˜¯é…ç½®é¡ºåºï¼Œå¯ä»¥è‡ªè¡Œè°ƒæ•´ã€‚
-	-- æ¨¡å¼ï¼š0 - ä¸å¯ç”¨ | 1 - å¯ç”¨ | 2 - å¼€å¯è¿ç‚¹
-	-- ç³»æ•°ï¼šæªæ¢°è‡ªèº«ç³»æ•°ï¼ŒåŸºäº ADS è¿›è¡Œè°ƒæ•´ (ADSä¸ºå…¨å±€ç³»æ•°ï¼Œæ­¤å¤„ä¸ºè‡ªèº«ç³»æ•°)
-	-- ä¸‹è¹²ç³»æ•°ï¼šä¸‹è¹²æ—¶çš„ç³»æ•°ï¼ŒåŸºäº ADS å’Œ è‡ªèº«ç³»æ•°
+	-- Ö§³ÖµÄÇ¹Ğµ£¬ÅÅÁĞË³Ğò¼´ÊÇÅäÖÃË³Ğò£¬¿ÉÒÔ×ÔĞĞµ÷Õû¡£
+	-- Ä£Ê½£º0 - ²»ÆôÓÃ | 1 - ÆôÓÃ | 2 - ¿ªÆôÁ¬µã
+	-- ÏµÊı£ºÇ¹Ğµ×ÔÉíÏµÊı£¬»ùÓÚ ADS ½øĞĞµ÷Õû (ADSÎªÈ«¾ÖÏµÊı£¬´Ë´¦Îª×ÔÉíÏµÊı)
+	-- ÏÂ¶×ÏµÊı£ºÏÂ¶×Ê±µÄÏµÊı£¬»ùÓÚ ADS ºÍ ×ÔÉíÏµÊı
 	canUse = {
 		[".45"] = {
-			-- æªæ¢°             æ¨¡å¼         ç³»æ•°        ä¸‹è¹²ç³»æ•°
-			{ "UMP45",          1,          1,          0.8 }, -- åŸºç¡€é•œ + æ‰©å®¹ï¼ŒBizon (åŸºç¡€é•œå³å¯)ï¼ŒVector (è¡¥å¿ + åŸºç¡€é•œ + æ‰©å®¹) | Reddot + Magï¼ŒBizon (Reddot)ï¼ŒVector (Komp + Reddot + Mag)
-			{ "Tommy Gun",      1,          1,          0.8 }, -- æ‰©å®¹ | Mag
+			-- Ç¹Ğµ             Ä£Ê½         ÏµÊı        ÏÂ¶×ÏµÊı
+			{ "UMP45",          1,          1,          0.8 }, -- »ù´¡¾µ + À©Èİ£¬Bizon (»ù´¡¾µ¼´¿É)£¬Vector (²¹³¥ + »ù´¡¾µ + À©Èİ) | Reddot + Mag£¬Bizon (Reddot)£¬Vector (Komp + Reddot + Mag)
+			{ "Tommy Gun",      1,          1,          0.8 }, -- À©Èİ | Mag
 		},
-			-- æªæ¢°             æ¨¡å¼         ç³»æ•°        ä¸‹è¹²ç³»æ•°
+			-- Ç¹Ğµ             Ä£Ê½         ÏµÊı        ÏÂ¶×ÏµÊı
 		["9mm"] = {
-			{ "Vector",         1,          1,          0.8 }, -- åŸºç¡€é•œ + æ‰©å®¹ | Reddot + Mag
-			{ "Micro UZI",      1,          1,          0.8 }, -- æ‰©å®¹ | Mag
+			{ "Vector",         1,          1,          0.8 }, -- »ù´¡¾µ + À©Èİ | Reddot + Mag
+			{ "Micro UZI",      1,          1,          0.8 }, -- À©Èİ | Mag
 		},
 		["5.56"] = {
-			-- æªæ¢°             æ¨¡å¼         ç³»æ•°        ä¸‹è¹²ç³»æ•°
-			{ "M416",           1,          1,          0.8 }, -- è¡¥å¿ + åŸºç¡€é•œ + ç›´è§’ + æªæ‰˜ + æ‰©å®¹ | Komp + Reddot + Triangular grip + Gunstock + Mag
-			{ "SCAR-L",         1,          1,          0.8 }, -- è¡¥å¿ + åŸºç¡€é•œ + ç›´è§’ + æ‰©å®¹ | Komp + Reddot + Triangular grip + Mag
-			{ "QBZ",            1,          1,          0.8 }, -- è¡¥å¿ + åŸºç¡€é•œ + ç›´è§’ + æ‰©å®¹ | Komp + Reddot + Triangular grip + Mag
-			{ "G36C",           1,          1,          0.8 }, -- è¡¥å¿ + åŸºç¡€é•œ + ç›´è§’ + æ‰©å®¹ | Komp + Reddot + Triangular grip + Mag
-			{ "M16A4",          2,          1,          0.8 }, -- è¡¥å¿ + åŸºç¡€é•œ + æªæ‰˜ + æ‰©å®¹ | Komp + Reddot + Gunstock + Mag
-			{ "Mini-14",        1,          1,          0.8 }, -- è¡¥å¿ + åŸºç¡€é•œ + æ‰©å®¹
+			-- Ç¹Ğµ             Ä£Ê½         ÏµÊı        ÏÂ¶×ÏµÊı
+			{ "M416",           1,          1,          0.8 }, -- ²¹³¥ + »ù´¡¾µ + Ö±½Ç + Ç¹ÍĞ + À©Èİ | Komp + Reddot + Triangular grip + Gunstock + Mag
+			{ "SCAR-L",         1,          1,          0.8 }, -- ²¹³¥ + »ù´¡¾µ + Ö±½Ç + À©Èİ | Komp + Reddot + Triangular grip + Mag
+			{ "QBZ",            1,          1,          0.8 }, -- ²¹³¥ + »ù´¡¾µ + Ö±½Ç + À©Èİ | Komp + Reddot + Triangular grip + Mag
+			{ "G36C",           1,          1,          0.8 }, -- ²¹³¥ + »ù´¡¾µ + Ö±½Ç + À©Èİ | Komp + Reddot + Triangular grip + Mag
+			{ "M16A4",          2,          1,          0.8 }, -- ²¹³¥ + »ù´¡¾µ + Ç¹ÍĞ + À©Èİ | Komp + Reddot + Gunstock + Mag
+			{ "Mini-14",        1,          1,          0.8 }, -- ²¹³¥ + »ù´¡¾µ + À©Èİ
 		},
 		["7.62"] = {
-			-- æªæ¢°             æ¨¡å¼         ç³»æ•°        ä¸‹è¹²ç³»æ•°
-			{ "AKM",            1,          1,          0.8 }, -- è¡¥å¿ + åŸºç¡€é•œ + æ‰©å®¹ | Komp + Reddot + Mag
-			{ "Beryl M762",     1,          1,          0.8 }, -- è¡¥å¿ + åŸºç¡€é•œ + ç›´è§’ + æ‰©å®¹ | Komp + Reddot + Triangular grip + Mag
-			{ "DP-28",          1,          1,          0.8 }, -- åŸºç¡€é•œ | Reddot
-			{ "SLR",            1,          1,          0.8 }, -- è¡¥å¿ + åŸºç¡€é•œ + æ‰©å®¹ + æ‰˜è…®æ¿
-			{ "SKS",            1,          1,          0.8 }, -- è¡¥å¿ + åŸºç¡€é•œ + å‚ç›´ + æ‰©å®¹ + æ‰˜è…®æ¿
+			-- Ç¹Ğµ             Ä£Ê½         ÏµÊı        ÏÂ¶×ÏµÊı
+			{ "AKM",            1,          1,          0.8 }, -- ²¹³¥ + »ù´¡¾µ + À©Èİ | Komp + Reddot + Mag
+			{ "Beryl M762",     1,          1,          0.8 }, -- ²¹³¥ + »ù´¡¾µ + Ö±½Ç + À©Èİ | Komp + Reddot + Triangular grip + Mag
+			{"Beryl M762 Lite", 1,          1,          0.8 }, -- ²¹³¥ + »ù´¡¾µ + °ë½Ø + À©Èİ
+			{"Groza",           1,          1,          0.75 }, -- »ù´¡¾µ + À©Èİ
+			{ "DP-28",          1,          1,          0.8 }, -- »ù´¡¾µ | Reddot
+			{ "SLR",            1,          1,          0.8 }, -- ²¹³¥ + »ù´¡¾µ + À©Èİ + ÍĞÈù°å
+			{ "SKS",            1,          1,          0.8 }, -- ²¹³¥ + »ù´¡¾µ + ´¹Ö± + À©Èİ + ÍĞÈù°å
 		},
 	},
 
-	-- Gé”®è‡ªå®šä¹‰ç»‘å®šï¼Œå¤šä½™çš„ç»„åˆé”®å¯ä»¥åˆ é™¤
-	-- å¯ç»‘å®šæŒ‡ä»¤è¯·å‚è€ƒ: https://github.com/kiccer/Soldier76#%E6%8C%87%E4%BB%A4%E5%88%97%E8%A1%A8
-	-- æŒ‡ä»¤ç»‘å®šæ¼”ç¤ºå‚è€ƒ: https://github.com/kiccer/Soldier76#g_bind-%E6%8C%87%E4%BB%A4%E7%BB%91%E5%AE%9A%E6%BC%94%E7%A4%BA
+	-- G¼ü×Ô¶¨Òå°ó¶¨£¬¶àÓàµÄ×éºÏ¼ü¿ÉÒÔÉ¾³ı
+	-- ¿É°ó¶¨Ö¸ÁîÇë²Î¿¼: https://github.com/kiccer/Soldier76#%E6%8C%87%E4%BB%A4%E5%88%97%E8%A1%A8
+	-- Ö¸Áî°ó¶¨ÑİÊ¾²Î¿¼: https://github.com/kiccer/Soldier76#g_bind-%E6%8C%87%E4%BB%A4%E7%BB%91%E5%AE%9A%E6%BC%94%E7%A4%BA
 	G_bind = {
 		-- G
 		["G3"] = "",
@@ -174,7 +178,7 @@ userInfo = {
 		["rshift + G9"] = "",
 		["rshift + G10"] = "",
 		["rshift + G11"] = "",
-		-- éé¼ æ ‡Gé”®ï¼Œå¯ä»¥ä½¿é”®ç›˜æˆ–è€…è€³æœºä¸Šçš„Gé”®ï¼Œé»˜è®¤ä½¿ç”¨é”®ç›˜Gé”®ï¼Œè¯·ç¡®ä¿ä½ ä½¿ç”¨çš„æ˜¯å¯ç¼–ç¨‹çš„ç½—æŠ€é”®ç›˜ | F1~12 (Non-mouse G-key)
+		-- ·ÇÊó±êG¼ü£¬¿ÉÒÔÊ¹¼üÅÌ»òÕß¶ú»úÉÏµÄG¼ü£¬Ä¬ÈÏÊ¹ÓÃ¼üÅÌG¼ü£¬ÇëÈ·±£ÄãÊ¹ÓÃµÄÊÇ¿É±à³ÌµÄÂŞ¼¼¼üÅÌ | F1~12 (Non-mouse G-key)
 		["F1"] = "AKM",
 		["F2"] = "Beryl M762",
 		["F3"] = "M416",
@@ -185,8 +189,8 @@ userInfo = {
 		["F8"] = "scopeX4",
 		["F9"] = "scopeX6",
 		["F10"] = "scopeX8",
-		["F11"] = "",
-		["F12"] = "",		
+		["F11"] = "Beryl M762 Lite",
+		["F12"] = "Groza",		
 		-- lalt + F
 		["lalt + F1"] = "SKS",
 		["lalt + F2"] = "SLR",
@@ -206,9 +210,29 @@ userInfo = {
 
 
 
------------------------------ [[ ä»¥ä¸‹æ˜¯è„šæœ¬æ ¸å¿ƒä»£ç ï¼Œéä¸“ä¸šäººå£«è¯·å‹¿æ”¹åŠ¨ ]] -----------------------------
------------------------------ [[ ä»¥ä¸‹æ˜¯è„šæœ¬æ ¸å¿ƒä»£ç ï¼Œéä¸“ä¸šäººå£«è¯·å‹¿æ”¹åŠ¨ ]] -----------------------------
------------------------------ [[ ä»¥ä¸‹æ˜¯è„šæœ¬æ ¸å¿ƒä»£ç ï¼Œéä¸“ä¸šäººå£«è¯·å‹¿æ”¹åŠ¨ ]] -----------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------- [[ ÒÔÏÂÊÇ½Å±¾ºËĞÄ´úÂë£¬·Ç×¨ÒµÈËÊ¿ÇëÎğ¸Ä¶¯ ]] -----------------------------
+----------------------------- [[ ÒÔÏÂÊÇ½Å±¾ºËĞÄ´úÂë£¬·Ç×¨ÒµÈËÊ¿ÇëÎğ¸Ä¶¯ ]] -----------------------------
+----------------------------- [[ ÒÔÏÂÊÇ½Å±¾ºËĞÄ´úÂë£¬·Ç×¨ÒµÈËÊ¿ÇëÎğ¸Ä¶¯ ]] -----------------------------
 
 -- internal configuration
 pubg = {
@@ -217,36 +241,36 @@ pubg = {
 		["9mm"] = {},
 		["5.56"] = {},
 		["7.62"] = {},
-	}, -- æªæ¢°åº“
+	}, -- Ç¹Ğµ¿â
 	gunOptions = {
 		[".45"] = {},
 		["9mm"] = {},
 		["5.56"] = {},
 		["7.62"] = {},
-	}, -- é…ç½®åº“
-	allCanUse = {}, -- æ‰€æœ‰å¯ç”¨æªæ¢°
-	allCanUse_index = 1, -- æ‰€æœ‰å¯ç”¨æªæ¢°åˆ—è¡¨ç´¢å¼•
-	allCanUse_count = 0, -- æ‰€æœ‰å¯ç”¨æ€»æ•°é‡
-	bulletType = "", -- é»˜è®¤å­å¼¹å‹å·
-	gunIndex = 1,	-- é€‰ä¸­æªæ¢°ä¸‹æ ‡
-	counter = 0, -- è®¡æ•°å™¨
-	xCounter = 0, -- xè®¡æ•°å™¨
-	sleep = userInfo.cpuLoad, -- é¢‘ç‡è®¾ç½® (è¿™é‡Œä¸èƒ½è®¾ç½®æˆ0ï¼Œè°ƒè¯•ä¼šå‡ºBUG)
-	sleepRandom = { userInfo.cpuLoad, userInfo.cpuLoad + 5 }, -- é˜²æ£€æµ‹éšæœºå»¶è¿Ÿ
-	startTime = 0, -- é¼ æ ‡æŒ‰ä¸‹æ—¶è®°å½•è„šæœ¬è¿è¡Œæ—¶é—´æˆ³
-	prevTime = 0, -- è®°å½•ä¸Šä¸€è½®è„šæœ¬è¿è¡Œæ—¶é—´æˆ³
-	scopeX1 = 1, -- åŸºç„å‹æªå€ç‡ (è£¸é•œã€çº¢ç‚¹ã€å…¨æ¯ã€ä¾§ç„)
-	scopeX2 = userInfo.sensitivity.scopeX2, -- äºŒå€å‹æªå€ç‡
-	scopeX3 = userInfo.sensitivity.scopeX3, -- ä¸‰å€å‹æªå€ç‡
-	scopeX4 = userInfo.sensitivity.scopeX4, -- å››å€å‹æªå€ç‡
-	scopeX6 = userInfo.sensitivity.scopeX6, -- å…­å€å‹æªå€ç‡
-	scopeX8 = userInfo.sensitivity.scopeX8, -- å…­å€å‹æªå€ç‡
-	scope_current = "scopeX1", -- å½“å‰ä½¿ç”¨å€é•œ
-	generalSensitivityRatio = userInfo.sensitivity.ADS / 100, -- æŒ‰æ¯”ä¾‹è°ƒæ•´çµæ•åº¦
-	isStart = false, -- æ˜¯å¦æ˜¯å¯åŠ¨çŠ¶æ€
-	G1 = false, -- G1é”®çŠ¶æ€
-	currentTime = 0, -- æ­¤åˆ»
-	bulletIndex = 0, -- ç¬¬å‡ é¢—å­å¼¹
+	}, -- ÅäÖÃ¿â
+	allCanUse = {}, -- ËùÓĞ¿ÉÓÃÇ¹Ğµ
+	allCanUse_index = 1, -- ËùÓĞ¿ÉÓÃÇ¹ĞµÁĞ±íË÷Òı
+	allCanUse_count = 0, -- ËùÓĞ¿ÉÓÃ×ÜÊıÁ¿
+	bulletType = "", -- Ä¬ÈÏ×Óµ¯ĞÍºÅ
+	gunIndex = 1,	-- Ñ¡ÖĞÇ¹ĞµÏÂ±ê
+	counter = 0, -- ¼ÆÊıÆ÷
+	xCounter = 0, -- x¼ÆÊıÆ÷
+	sleep = userInfo.cpuLoad, -- ÆµÂÊÉèÖÃ (ÕâÀï²»ÄÜÉèÖÃ³É0£¬µ÷ÊÔ»á³öBUG)
+	sleepRandom = { userInfo.cpuLoad, userInfo.cpuLoad + 5 }, -- ·À¼ì²âËæ»úÑÓ³Ù
+	startTime = 0, -- Êó±ê°´ÏÂÊ±¼ÇÂ¼½Å±¾ÔËĞĞÊ±¼ä´Á
+	prevTime = 0, -- ¼ÇÂ¼ÉÏÒ»ÂÖ½Å±¾ÔËĞĞÊ±¼ä´Á
+	scopeX1 = 1, -- »ùÃéÑ¹Ç¹±¶ÂÊ (Âã¾µ¡¢ºìµã¡¢È«Ï¢¡¢²àÃé)
+	scopeX2 = userInfo.sensitivity.scopeX2, -- ¶ş±¶Ñ¹Ç¹±¶ÂÊ
+	scopeX3 = userInfo.sensitivity.scopeX3, -- Èı±¶Ñ¹Ç¹±¶ÂÊ
+	scopeX4 = userInfo.sensitivity.scopeX4, -- ËÄ±¶Ñ¹Ç¹±¶ÂÊ
+	scopeX6 = userInfo.sensitivity.scopeX6, -- Áù±¶Ñ¹Ç¹±¶ÂÊ
+	scopeX8 = userInfo.sensitivity.scopeX8, -- Áù±¶Ñ¹Ç¹±¶ÂÊ
+	scope_current = "scopeX1", -- µ±Ç°Ê¹ÓÃ±¶¾µ
+	generalSensitivityRatio = userInfo.sensitivity.ADS / 100, -- °´±ÈÀıµ÷ÕûÁéÃô¶È
+	isStart = false, -- ÊÇ·ñÊÇÆô¶¯×´Ì¬
+	G1 = false, -- G1¼ü×´Ì¬
+	currentTime = 0, -- ´Ë¿Ì
+	bulletIndex = 0, -- µÚ¼¸¿Å×Óµ¯
 
 
 	currentWeapon = 0, --Primary weapon index
@@ -254,21 +278,21 @@ pubg = {
 	weaponScopes = {"scopeX1", "scopeX1"},
 }
 
-pubg.xLengthForDebug = pubg.generalSensitivityRatio * 60 -- è°ƒè¯•æ¨¡å¼ä¸‹çš„æ°´å¹³ç§»åŠ¨å•å…ƒé•¿åº¦
--- æ¸²æŸ“èŠ‚ç‚¹
+pubg.xLengthForDebug = pubg.generalSensitivityRatio * 60 -- µ÷ÊÔÄ£Ê½ÏÂµÄË®Æ½ÒÆ¶¯µ¥Ôª³¤¶È
+-- äÖÈ¾½Úµã
 pubg.renderDom = {
 	switchTable = "",
-	separator = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n", -- åˆ†å‰²çº¿
-	combo_key = "G-key", -- ç»„åˆé”®
-	cmd = "cmd", -- æŒ‡ä»¤
-	autoLog = "No operational data yet.\n", -- å‹æªè¿‡ç¨‹äº§ç”Ÿçš„æ•°æ®è¾“å‡º
+	separator = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n", -- ·Ö¸îÏß
+	combo_key = "G-key", -- ×éºÏ¼ü
+	cmd = "cmd", -- Ö¸Áî
+	autoLog = "No operational data yet.\n", -- Ñ¹Ç¹¹ı³Ì²úÉúµÄÊı¾İÊä³ö
 }
 
--- æ˜¯å¦å¼€é•œæˆ–ç„å‡†
+-- ÊÇ·ñ¿ª¾µ»òÃé×¼
 function pubg.isAimingState (mode)
 	local switch = {
 
-		-- å¼€é•œ
+		-- ¿ª¾µ
 		["ADS"] = function ()
 			if userInfo.aimingSettings == "recommend" then
 				return IsMouseButtonPressed(3) and not IsModifierPressed("lshift")
@@ -281,7 +305,7 @@ function pubg.isAimingState (mode)
 			end
 		end,
 
-		-- è…°å°„
+		-- ÑüÉä
 		["Aim"] = function ()
 			if userInfo.aimingSettings == "recommend" then
 				if userInfo.autoPressAimKey == "" then
@@ -350,9 +374,46 @@ pubg["Beryl M762"] = function (gunName)
 			{5, 81},
 			{7, 123},
 			{10, 143},
-			{20, 143},
-			{25, 160},
-			{40, 170},
+			{20, 153},
+			{25, 170},
+			{40, 180},
+		}
+	})
+
+end
+
+pubg["Beryl M762 Lite"] = function (gunName)
+
+	return pubg.execOptions(gunName, {
+		interval = 86,
+		ballistic = {
+			{1, 0},
+			{2, 140},
+			{5, 81},
+			{7, 100},
+			{10, 113},
+			{20, 127},
+			{25, 130},
+			{40, 140},
+		}
+	})
+
+end
+
+pubg["Groza"] = function (gunName)
+
+	return pubg.execOptions(gunName, {
+		interval = 82,
+		ballistic = {
+			{1, 0},
+			{2, 100},
+			{5, 81},
+			{7, 93},
+			{10, 110},
+			{13, 120},
+			{20, 130},
+			{25, 140},
+			{40, 150},
 		}
 	})
 
@@ -546,7 +607,7 @@ pubg["Mini-14"] = function (gunName)
 
 end
 
--- [[é€šè¿‡æªæ¢°åæŸ¥æ‰¾åœ¨ canuse ä¸­çš„é¡¹]]
+-- [[Í¨¹ıÇ¹ĞµÃû²éÕÒÔÚ canuse ÖĞµÄÏî]]
 function pubg.canUseFindByGunName (gunName)
 	local forList = { ".45", "9mm", "5.56", "7.62" }
 
@@ -612,7 +673,7 @@ function pubg.execOptions (gunName, options)
 		end
 	end
 
-	-- å–æ•´
+	-- È¡Õû
 	-- for i = 1, #ballisticConfig2 do
 	-- 	ballisticConfig2[i] = math.ceil(ballisticConfig2[i])
 	-- end
@@ -648,7 +709,7 @@ function pubg.init ()
 				pubg.gun[type][gunCount] = gunName -- Adding available firearms to the Arsenal
 				pubg.gunOptions[type][gunCount] = pubg[gunName](gunName) -- Get firearms data and add it to the configuration library
 
-				-- å•ç‹¬è®¾ç½®è¿å‘
+				-- µ¥¶ÀÉèÖÃÁ¬·¢
 				pubg.gunOptions[type][gunCount].autoContinuousFiring = ({ 0, 0, 1 })[
 					math.max(1, math.min(gunState + 1, 3))
 				]
@@ -830,7 +891,7 @@ function pubg.findInCanUse (cmd)
 	if "first_in_canUse" == cmd then
 		pubg.allCanUse_index = 1
 	elseif "next_in_canUse" == cmd then
-		if pubg.allCanUse_index &lt; #pubg.allCanUse then
+		if pubg.allCanUse_index < #pubg.allCanUse then
 			pubg.allCanUse_index = pubg.allCanUse_index + 1
 		end
 	elseif "last_in_canUse" == cmd then
@@ -845,7 +906,7 @@ function pubg.findInSeries (cmd)
 	if "first" == cmd then
 		pubg.gunIndex = 1
 	elseif "next" == cmd then
-		if pubg.gunIndex &lt; #pubg.gun[pubg.bulletType] then
+		if pubg.gunIndex < #pubg.gun[pubg.bulletType] then
 			pubg.gunIndex = pubg.gunIndex + 1
 		end
 	elseif "last" == cmd then
@@ -889,8 +950,7 @@ function pubg.setWeapon (weaponName)
 	pubg.changeIsStart(true)
 end
 
-
---[[ ä¸€é”®èˆ”åŒ…ï¼Œä»…æ‹¾å–è¿›èƒŒåŒ…çš„ç‰©å“ï¼Œæ— æ³•æ‹¾å–éœ€ç©¿æˆ´çš„ç‰©å“ ]]
+--[[ Ò»¼üÌò°ü£¬½öÊ°È¡½ø±³°üµÄÎïÆ·£¬ÎŞ·¨Ê°È¡Ğè´©´÷µÄÎïÆ· ]]
 function pubg.fastLickBox ()
 	PressAndReleaseKey("lshift")
 	PressAndReleaseKey("lctrl")
@@ -908,12 +968,12 @@ function pubg.fastLickBox ()
 	}
 	local itemHeight = 83 / 1440 * 65535
 
-	-- é‡å¤ 3 æ¬¡åŠ¨ä½œï¼Œå¼ºåŒ–æ‹¾å–æˆåŠŸç‡
+	-- ÖØ¸´ 3 ´Î¶¯×÷£¬Ç¿»¯Ê°È¡³É¹¦ÂÊ
 	for i = 1, 3 do
 		for j = 1, 13 do
 			MoveMouseTo(lastItemCp[1], lastItemCp[2] - itemHeight * (j - 1))
 			PressMouseButton(1)
-			MoveMouseTo(670 / 2560 * 65535, 710 / 1440 * 65535) -- ä¿®æ”¹ä¸ºèƒŒåŒ…çš„åæ ‡
+			MoveMouseTo(670 / 2560 * 65535, 710 / 1440 * 65535) -- ĞŞ¸ÄÎª±³°üµÄ×ø±ê
 			ReleaseMouseButton(1)
 		end
 	end
@@ -923,7 +983,7 @@ function pubg.fastLickBox ()
 	PressAndReleaseKey("tab")
 end
 
---[[ ä¸€é”®æ‹¾å–åŠŸèƒ½ï¼Œæ”¯æŒæ‰€æœ‰åˆ†è¾¨ç‡ ]]
+--[[ Ò»¼üÊ°È¡¹¦ÄÜ£¬Ö§³ÖËùÓĞ·Ö±æÂÊ ]]
 function pubg.fastPickup ()
 	PressAndReleaseKey("lshift")
 	PressAndReleaseKey("lctrl")
@@ -941,7 +1001,7 @@ function pubg.fastPickup ()
 	}
 	local itemHeight = 83 / 1440 * 65535
 
-	-- é‡å¤ 3 æ¬¡åŠ¨ä½œï¼Œå¼ºåŒ–æ‹¾å–æˆåŠŸç‡
+	-- ÖØ¸´ 3 ´Î¶¯×÷£¬Ç¿»¯Ê°È¡³É¹¦ÂÊ
 	for i = 1, 3 do
 		for j = 1, 13 do
 			MoveMouseTo(lastItemCp[1], lastItemCp[2] - itemHeight * (j - 1))
@@ -956,7 +1016,7 @@ function pubg.fastPickup ()
 	PressAndReleaseKey("tab")
 end
 
---[[ èƒŒåŒ…æ¸…ç©ºä¹‹æœ¯ï¼Œå°±ç®—æˆ˜æ­»ï¼Œä¹Ÿè¦è®©æ•Œäººèˆ”ä¸ªç©ºç›’ï¼ ]]
+--[[ ±³°üÇå¿ÕÖ®Êõ£¬¾ÍËãÕ½ËÀ£¬Ò²ÒªÈÃµĞÈËÌò¸ö¿ÕºĞ£¡ ]]
 function pubg.fastDiscard ()
 	PressAndReleaseKey("lshift")
 	PressAndReleaseKey("lctrl")
@@ -972,7 +1032,7 @@ function pubg.fastDiscard ()
 		1210 / 1440 * 65535
 	}
 	local itemHeight = 83 / 1440 * 65535
-	-- æ¸…ç©ºèƒŒåŒ… ç¬¬ä¸€è½®
+	-- Çå¿Õ±³°ü µÚÒ»ÂÖ
 	Sleep(10 + pubg.sleep)
 	for i = 1, 5 do
 		for j = 1, 13 do
@@ -982,7 +1042,7 @@ function pubg.fastDiscard ()
 			ReleaseMouseButton(1)
 		end
 	end
-	-- æ¸…ç©ºæ­¦å™¨
+	-- Çå¿ÕÎäÆ÷
 	Sleep(10 + pubg.sleep)
 	local itemPos = {
 		{ 1770, 180 },
@@ -995,7 +1055,7 @@ function pubg.fastDiscard ()
 		MoveMouseTo(itemPos[i][1] / 2560 * 65535, itemPos[i][2] / 1440 * 65535)
 		PressAndReleaseMouseButton(3)
 	end
-	-- æ¸…ç©ºèƒŒåŒ… ç¬¬äºŒè½®
+	-- Çå¿Õ±³°ü µÚ¶şÂÖ
 	Sleep(10 + pubg.sleep)
 	for i = 1, 5 do
 		for j = 1, 13 do
@@ -1005,7 +1065,7 @@ function pubg.fastDiscard ()
 			ReleaseMouseButton(1)
 		end
 	end
-	-- æ¸…ç©ºè£…å¤‡
+	-- Çå¿Õ×°±¸
 	Sleep(10 + pubg.sleep)
 	local itemPos2 = {
 		{ 900, 392 },
@@ -1056,6 +1116,8 @@ function pubg.runCmd (cmd)
 		["M16A4"] = pubg.setGun,
 		["AKM"] = pubg.setGun,
 		["Beryl M762"] = pubg.setGun,
+		["Beryl M762 Lite"] = pubg.setGun,
+		["Groza"] = pubg.setGun,
 		["DP-28"] = pubg.setGun,
 		["SLR"] = pubg.setGun,
 		["SKS"] = pubg.setGun,
@@ -1093,7 +1155,7 @@ function pubg.outputLogRender ()
 		pubg.renderDom.switchTable = pubg.outputLogGunSwitchTable()
 	end
 	local resStr = table.concat({
-		"\n>> [\"", pubg.renderDom.combo_key, "\"] = \"", pubg.renderDom.cmd, "\" &lt;&lt;\n",
+		"\n>> [\"", pubg.renderDom.combo_key, "\"] = \"", pubg.renderDom.cmd, "\" <<\n",
 		pubg.renderDom.separator,
 		pubg.renderDom.switchTable,
 		pubg.renderDom.separator,
@@ -1239,7 +1301,7 @@ function OnEvent (event, arg, family)
 	pubg.OnEvent_NoRecoil(event, arg, family)
 
 	-- Switching arsenals according to different types of ammunition
-	if event == "MOUSE_BUTTON_PRESSED" and arg >=3 and arg &lt;= 11 and family == "mouse" then
+	if event == "MOUSE_BUTTON_PRESSED" and arg >=3 and arg <= 11 and family == "mouse" then
 		local modifier = "G" .. arg
 		local list = { "lalt", "lctrl", "lshift", "ralt", "rctrl", "rshift" }
 
@@ -1251,7 +1313,7 @@ function OnEvent (event, arg, family)
 		end
 
 		pubg.modifierHandle(modifier)
-	elseif event == "G_PRESSED" and arg >=1 and arg &lt;= 12 then
+	elseif event == "G_PRESSED" and arg >=1 and arg <= 12 then
 		-- if not pubg.runStatus() and userInfo.startControl ~= "G_bind" then return false end
 		local modifier = "F" .. arg
 
@@ -1323,9 +1385,9 @@ function table.forEach (t, c)
 end
 
 --[[
-	* æ‰“å° table
-	* @param  {any} val     ä¼ å…¥å€¼
-	* @return {str}         æ ¼å¼åŒ–åçš„æ–‡æœ¬
+	* ´òÓ¡ table
+	* @param  {any} val     ´«ÈëÖµ
+	* @return {str}         ¸ñÊ½»¯ºóµÄÎÄ±¾
 ]]
 function table.print (val)
 
@@ -1333,7 +1395,7 @@ function table.print (val)
 		_indent = _indent or 1
 		keyType = keyType or "string"
 		local res = ""
-		local indentStr = "     " -- ç¼©è¿›ç©ºæ ¼
+		local indentStr = "     " -- Ëõ½ø¿Õ¸ñ
 		local indent = string.rep(indentStr, _indent)
 		local end_indent = string.rep(indentStr, _indent - 1)
 		local putline = function (...)
@@ -1385,13 +1447,13 @@ function table.print (val)
 
 			putline("}, ")
 		elseif type(val) == "string" then
-			val = string.gsub(val, "\a", "\\a") -- å“é“ƒ(BEL)
-			val = string.gsub(val, "\b", "\\b") -- é€€æ ¼(BS),å°†å½“å‰ä½ç½®ç§»åˆ°å‰ä¸€åˆ—
-			val = string.gsub(val, "\f", "\\f") -- æ¢é¡µ(FF),å°†å½“å‰ä½ç½®ç§»åˆ°ä¸‹é¡µå¼€å¤´
-			val = string.gsub(val, "\n", "\\n") -- æ¢è¡Œ(LF),å°†å½“å‰ä½ç½®ç§»åˆ°ä¸‹ä¸€è¡Œå¼€å¤´
-			val = string.gsub(val, "\r", "\\r") -- å›è½¦(CR),å°†å½“å‰ä½ç½®ç§»åˆ°æœ¬è¡Œå¼€å¤´
-			val = string.gsub(val, "\t", "\\t") -- æ°´å¹³æŒ‡æ ‡(HT),(è°ƒç”¨ä¸‹ä¸€ä¸ªTABä½ç½®)
-			val = string.gsub(val, "\v", "\\v") -- å‚ç›´æŒ‡æ ‡(VT)
+			val = string.gsub(val, "\a", "\\a") -- ÏìÁå(BEL)
+			val = string.gsub(val, "\b", "\\b") -- ÍË¸ñ(BS),½«µ±Ç°Î»ÖÃÒÆµ½Ç°Ò»ÁĞ
+			val = string.gsub(val, "\f", "\\f") -- »»Ò³(FF),½«µ±Ç°Î»ÖÃÒÆµ½ÏÂÒ³¿ªÍ·
+			val = string.gsub(val, "\n", "\\n") -- »»ĞĞ(LF),½«µ±Ç°Î»ÖÃÒÆµ½ÏÂÒ»ĞĞ¿ªÍ·
+			val = string.gsub(val, "\r", "\\r") -- »Ø³µ(CR),½«µ±Ç°Î»ÖÃÒÆµ½±¾ĞĞ¿ªÍ·
+			val = string.gsub(val, "\t", "\\t") -- Ë®Æ½Ö¸±ê(HT),(µ÷ÓÃÏÂÒ»¸öTABÎ»ÖÃ)
+			val = string.gsub(val, "\v", "\\v") -- ´¹Ö±Ö¸±ê(VT)
 			putline("\"", val, "\", ")
 		elseif type(val) == "boolean" then
 			putline(val and "true, " or "false, ")
